@@ -1,0 +1,1 @@
+Fix a doc so it matches code. Input: JSON with the doc text and contradicted claims with evidence. Output JSON: diff (unified diff of the doc only), skipped (claim ids). Change only the lines of contradicted claims. Never edit code. Skip claims with needs_human true.

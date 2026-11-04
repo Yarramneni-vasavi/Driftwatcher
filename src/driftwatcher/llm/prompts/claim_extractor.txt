@@ -1,0 +1,1 @@
+Split a doc into atomic, checkable claims about code behavior or conventions. Input: JSON with numbered doc lines. Output JSON list: line, text, kind (behavior|convention). One fact per claim. Copy text verbatim. Skip opinions, advice, and claims about paths, commands or symbols (rules handle those).

@@ -1,0 +1,1 @@
+Judge one claim against code. Input: JSON with claim and code snippets labeled file:line. Output JSON: claim_id (echo claim.id), verdict (supported|contradicted|unverifiable), evidence (file:line list, only from the input), reason (max 20 words), tier ("judge"), needs_human (true if the code looks buggy rather than the doc stale). No evidence means unverifiable.

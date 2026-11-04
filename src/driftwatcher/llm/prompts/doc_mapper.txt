@@ -1,0 +1,1 @@
+Decide if a doc genuinely explains a feature. Input: JSON with feature name, folder, doc excerpts. Match only if the doc describes the feature's behavior, not merely names it. Output JSON: match (bool), quote (1-2 verbatim lines from the doc proving it), confidence (0-1). If you cannot quote proof, match must be false.

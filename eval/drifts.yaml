@@ -1,0 +1,41 @@
+# Labeled injected drifts + negative cases (plan Phase 6).
+# Each entry: what to change in the scratch copy, and the expected outcome.
+
+drifts:
+  - id: renamed-function
+    kind: rename
+    file: services/auth/session.py
+    from: create_session
+    to: open_session
+    expect: contradicted
+
+  - id: removed-flag
+    kind: remove-flag
+    file: services/auth/cli.py
+    flag: --dry-run
+    expect: contradicted
+
+  - id: changed-command
+    kind: change-command
+    file: Makefile
+    from: test-auth
+    to: test-identity
+    expect: contradicted
+
+  - id: undocumented-module
+    kind: add-module
+    file: services/auth/refresh.py
+    expect: unmapped-or-warn
+
+  - id: behavior-change
+    kind: behavior
+    file: services/auth/session.py
+    from: session_expiry = sliding
+    to: session_expiry = fixed_15m
+    expect: contradicted
+
+negative:
+  - id: unrelated-change
+    file: services/payments/README.md
+    note: typo fix with no related claims
+    expect: green

@@ -1,0 +1,25 @@
+name: drift-check
+on: [pull_request]
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    permissions: { contents: read, pull-requests: write }
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - uses: actions/cache@v4
+        with:
+          path: .drift/cache
+          key: drift-${{ github.event.pull_request.base.sha }}
+          restore-keys: drift-
+      - run: pip install -e .
+      - run: driftwatch check --base origin/${{ github.base_ref }} --out drift_report.md --log-format plain
+        env: { BASETEN_API_KEY: ${{ secrets.BASETEN_API_KEY }}, MODEL_API_KEY: ${{ secrets.MODEL_API_KEY }} }
+      - if: always()
+        run: gh pr comment ${{ github.event.pull_request.number }} --body-file drift_report.md
+        env: { GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} }
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: drift-logs, path: .drift/logs }

@@ -1,0 +1,30 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "driftwatcher"
+version = "0.1.0"
+description = "Detect drift between context files and code."
+authors = ["Vasavi Yarramneni"]
+readme = "README.md"
+packages = [{include = "driftwatcher", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pydantic = "^2.0"
+typer = "^0.9"
+# Typer 0.9.x is not compatible with Click 8.2+ option parsing.
+click = ">=8.0,<8.2"
+openai = "^1.0"
+pyyaml = "^6.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+
+[tool.poetry.scripts]
+driftwatcher = "driftwatcher.cli.main:app"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

@@ -1,0 +1,19 @@
+{
+  "feature": "flow-calc",
+  "folder": "tests/fixtures/flow_calc",
+  "doc": "tests/fixtures/flow_calc/SKILL.md",
+  "entries": {
+    "compute_total": [
+      {"id": "r1", "scenario": "negative", "when": "sku is empty", "then": "raises ValueError", "significance": "high", "lines": [9, 10]},
+      {"id": "r2", "scenario": "negative", "when": "price fetch keeps failing", "then": "retries then raises TimeoutError", "significance": "high", "lines": [15, 20]},
+      {"id": "r3", "scenario": "positive", "when": "coupon is None", "then": "discount rate is 0.0", "significance": "high", "lines": [24, 25]},
+      {"id": "r4", "scenario": "edge", "when": "coupon is EXPIRED", "then": "discount rate is 0.0", "significance": "high", "lines": [26, 27]},
+      {"id": "r5", "scenario": "positive", "when": "coupon is valid", "then": "discount rate is 0.1", "significance": "high", "lines": [28]},
+      {"id": "r6", "scenario": "positive", "when": "items and rate known", "then": "total is subtotal times (1 - rate)", "significance": "high", "lines": [34]}
+    ],
+    "total_all": [
+      {"id": "r1", "scenario": "positive", "when": "batches given", "then": "processes each batch in chunks of BATCH (100)", "significance": "high", "lines": [39, 40]},
+      {"id": "r2", "scenario": "positive", "when": "chunk ready", "then": "calls compute_total per chunk", "significance": "high", "lines": [41]}
+    ]
+  }
+}

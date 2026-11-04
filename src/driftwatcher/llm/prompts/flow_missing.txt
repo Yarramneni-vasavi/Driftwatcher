@@ -1,0 +1,1 @@
+Decide which behavior rules the doc covers. Input: JSON with doc text and rules[{id, when, then}]. Output JSON: covered[rule ids the doc states or clearly implies], missing[the rest]. A rule is covered only if the doc states its behavior; a shared keyword is not enough. Reply with ids from the input only.
